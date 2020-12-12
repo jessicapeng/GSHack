@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title id="title">GS Hackathon</title>
+
+        <!-- Flask Stylesheet -->
+        <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/main.css')}}">
+
+        <!--Flask Bootstrap Stylesheet-->
+        <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/mdb.min.css')}}">
+
+        <!--Flask Javascript-->
+        <script src="{{url_for('static', filename='js/mdb.min.js')}}"></script>
+
+        <!--Fonts-->
+        <link rel="stylesheet" href="https://www.apple.com/wss/fonts?families=SF+Pro,v3|SF+Pro+Icons,v3" type="text/css" />
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+
+        <!--Jquery-->
+        <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+        
+    </head>
+    <style>
+        h1
+        {
+            margin: 1em;
+        }
+        .center-flex
+        {
+            display: flex;
+            justify-content: center;
+        }
+        .align-center
+        {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        }
+
+        .graph
+        {
+            width: 40em;
+            height: 24em;
+        }
+
+    </style>
+    <body>
+        <h1 class="center-flex">Covid-19 Effects on the US Market and Economy</h1>
+        <img class = "align-center graph" src="plot.png">
+    </body>
+</html>
