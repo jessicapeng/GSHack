@@ -27,7 +27,6 @@ def index():
     if request.method == "GET":
         return render_template("index.html")
     if request.method == "POST":
-        
         print(request.form)
         return render_template("index.html")
 
