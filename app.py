@@ -6,6 +6,7 @@ IPv6 Sec-Check Main Controller app.py
 #imports and dependencies for main controller - lib
 from flask import Flask, render_template, request, jsonify
 from datetime import datetime
+from api import script
 
 import json
 import requests 
@@ -28,8 +29,10 @@ def index():
         return render_template("index.html")
     if request.method == "POST":
         print(request.form)
-        return render_template("index.html")
+        
+        return render_template("plot.html")
 
+    
 #start the server
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
