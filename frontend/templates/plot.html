@@ -50,7 +50,14 @@
         <h2>Start Date: {{ start }} </h2>
         <h2>End Date: {{ end }} </h2>
         <h1 class="center-flex">Covid-19 Effects on the US Market and Economy</h1>
-        <img class = "align-center graph"  src="{{url_for('static', filename='img/plot.png')}}"/>
+        <img class = "NO-CACHE align-center graph"  src="{{url_for('static', filename='img/plot.png')}}"/>
     </body>
     {% endblock content %}
+    <script>
+        var nods = document.getElementsByClassName('NO-CACHE');
+    for (var i = 0; i < nods.length; i++)
+    {
+        nods[i].attributes['src'].value += "?a=" + Math.random();
+    }
+    </script>
 </html>
