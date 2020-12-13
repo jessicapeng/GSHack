@@ -4,11 +4,7 @@ IPv6 Sec-Check Main Controller app.py
 """
 
 #imports and dependencies for main controller - lib
-<<<<<<< HEAD
-from flask import Flask, render_template, request, jsonify
-from datetime import datetime
-#from api import script
-=======
+
 from flask import Flask, render_template, request, jsonify, redirect, url_for, Response
 import datetime
 # from gs_quant.session import GsSession, Environment
@@ -18,7 +14,6 @@ import matplotlib.pyplot as plt
 matplotlib.use('Agg')
 import pandas as pd
 import numpy as np
->>>>>>> db1917b5de871aefd8b91bbe495c2b6550b98b02
 
 import json
 import requests
@@ -101,7 +96,6 @@ def create_figure():
 
     # who_dataset = Dataset('COVID19_COUNTRY_DAILY_WHO')
     # data_frame = who_dataset.get_data(countryId='US', start=start, end=end)
->>>>>>> db1917b5de871aefd8b91bbe495c2b6550b98b02
 
     # ax = data_frame['totalConfirmed'].plot(grid=True, figsize=(12, 8), title="Total Confirmed Cases by WHO", lw=4)
     # ax.set_ylabel("Daily Total Confirmed Cases")
