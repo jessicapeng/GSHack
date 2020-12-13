@@ -1,6 +1,6 @@
 """
-IPv6 Sec-Check Main Controller app.py
-@author: Jessica Peng
+GS Hacks
+@author: Jessica Peng, Anuraag
 """
 
 #imports and dependencies for main controller - lib
