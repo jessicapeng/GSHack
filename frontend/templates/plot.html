@@ -49,8 +49,13 @@
     <body>
         <h2>Start Date: {{ start }} </h2>
         <h2>End Date: {{ end }} </h2>
-        <h1 class="center-flex">Covid-19 Effects on the US Market and Economy</h1>
+        <h1 class="center-flex">Graphs and Analysis</h1>
+        <h4 class="center-flex">Close Prices of Various Stock Indices</h4>
         <img class = "NO-CACHE align-center graph"  src="{{url_for('static', filename='img/plot.png')}}"/>
+        <br />
+        <h4 class="center-flex"> Total Confirmed Cases over Time</h4>
+        <img class = "NO-CACHE align-center graph"  src="{{url_for('static', filename='img/cases.png')}}"/>
+        <h3>Correlation between S&P 500 and Total Confirmed Cases during the Times Given: {{ corr }}</h3>
     </body>
     {% endblock content %}
     <script>

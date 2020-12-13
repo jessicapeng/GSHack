@@ -10,6 +10,7 @@ import datetime
 
 import pandas_datareader as pdr
 import matplotlib.pyplot as plt
+from scipy import stats
 # matplotlib.use('Agg')
 import pandas as pd
 import numpy as np
@@ -59,12 +60,16 @@ def plot():
     fig = create_stock_figure(start, end)
     plt.savefig('frontend/static/img/plot.png')
 
-    # fig = create_covid_figure(start, end)
-    # plt.savefig('frontend/templates/cases.png')
+    plt.close()
+
+    fig = create_covid_figure(start, end)
+    plt.savefig('frontend/static/img/cases.png')
 
     plt.close()
 
-    return render_template("plot.html", start=start, end=end)
+    corr = calculate_correlation(start, end)
+
+    return render_template("plot.html", start=start, end=end, corr=corr)
 
 # @app.route('/plot.png')
 # def plot_png():
@@ -104,25 +109,54 @@ def create_stock_figure(start_date, end_date):
 
 def create_covid_figure(start_date, end_date):
 
-    from gs_quant.session import GsSession, Environment
-    from gs_quant.data import Dataset
+    start_split = str(start_date).split("-")
+    end_split = str(end_date).split("-")
 
-    GsSession.use(client_id='c8a9707af9bc453e8f08f69eb44d1d0a',
-        client_secret='e36e001a7ab7205c46d7e9d09794b46f1b019f0d71d5857c4bdf7681f2c24e6a',
-        scopes=('read_product_data',))
+    start = datetime.datetime(int(start_split[0]), int(start_split[1]), int(start_split[2]))
+    end = datetime.datetime(int(end_split[0]), int(end_split[1]), int(end_split[2]))
+
+    df3 = pd.read_csv("covid_data_who.csv")
+
+    df3['date'] = pd.to_datetime(df3['date'])
+
+    mask = (df3['date'] >= start) & (df3['date'] <= end)
+    df4 = df3.loc[mask]
+
+    graph = df4.plot(x='date', y='totalConfirmed', grid=True, figsize=(12, 8), title="Total Confirmed Cases by WHO", lw=4)
+    graph.set_ylabel("Daily Total Confirmed Cases")
+    graph.set_facecolor("#000000")
+
+    return graph.get_figure()
+
+def calculate_correlation(start_date, end_date):
 
     start_split = str(start_date).split("-")
     end_split = str(end_date).split("-")
 
-    start = datetime.date(int(start_split[0]), int(start_split[1]), int(start_split[2]))
-    end = datetime.date(int(end_split[0]), int(end_split[1]), int(end_split[2]))
+    start = datetime.datetime(int(start_split[0]), int(start_split[1]), int(start_split[2]))
+    end = datetime.datetime(int(end_split[0]), int(end_split[1]), int(end_split[2]))
 
-    who_dataset = Dataset('COVID19_COUNTRY_DAILY_WHO')
-    data_frame = who_dataset.get_data(countryId='US', start=start, end=end)
+    sp500 = pdr.get_data_yahoo('VOO', start=start, end=end)
+    sp_pct_change = np.mean(np.array(sp500['Adj Close'].pct_change()[1:]))
+    
+    df = pd.read_csv("covid_data_who.csv")
+    df['date'] = pd.to_datetime(df['date'])
 
-    ax = data_frame['totalConfirmed'].plot(grid=True, figsize=(12, 8), title="Total Confirmed Cases by WHO", lw=4)
-    ax.set_ylabel("Daily Total Confirmed Cases")
-    ax.set_facecolor("#000000")
+    mask = (df['date'] >= start) & (df['date'] <= end)
+    df2 = df.loc[mask]
+
+    sp2 = sp500['Adj Close']
+    sp2.index = pd.DatetimeIndex(sp2.index)
+    sp2 = sp2.reindex(pd.date_range(start, end), fill_value=0)
+
+    for i in range(1, len(sp2)):
+        if sp2[i] == 0:
+            sp2[i] = sp2[i-1] * (1 + sp_pct_change)
+
+    corr = stats.pearsonr(sp2, df2['totalConfirmed'])
+
+    return corr[0]
+
     
 #start the server
 if __name__ == "__main__":
