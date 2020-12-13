@@ -12,6 +12,6 @@ To get started, users must install all the following dependencies:
 - numpy
 - matplotlib
 
-To run the program, call `python3 app.py` or `flask run`
+To run the program, call `python3 app.py` or `flask run` in the home directory.
 
 Open up browser, and type in `http://0.0.0.0:5000/` into the url. 
