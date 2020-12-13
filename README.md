@@ -14,4 +14,4 @@ To get started, users must install all the following dependencies:
 
 To run the program, call `python3 app.py` or `flask run` in the home directory.
 
-Open up browser, and type in `http://0.0.0.0:5000/` into the url. The home page will show up, with drop-down menus to enter dates. Enter the months and days of the start and end date, and press Submit.
+Open up browser, and type in `http://127.0.0.1:5000/` into the url. The home page will show up, with drop-down menus to enter dates. Enter the months and days of the start and end date, and press Submit.
