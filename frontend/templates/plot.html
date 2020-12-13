@@ -20,10 +20,12 @@
         <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
         
     </head>
+    
     <style>
-        h1
+        
+        h4 
         {
-            margin: 1em;
+            margin-left: 5em;
         }
         .center-flex
         {
@@ -43,19 +45,81 @@
             width: 40em;
             height: 24em;
         }
+        body
+        {
+            background-color: #99bae2;
+        }
+        .back
+        {
+            padding-top: 0.5em;
+            padding-bottom: 0.5em;
+            padding-left: 2em;
+            padding-right: 2em;
+            margin-right:1em;
+            margin-top: 1em;
+            margin-bottom: 1em;
+            border-radius: 6px;
+            float: right;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            color: black;
+        }
+        a 
+        {
+            text-decoration: none;
+        }
 
+        
+        .dates
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        h1 
+        {
+            margin-left: 2em;
+            margin-top: 1em;
+            margin-bottom: -0.5em;
+        }
+        .background
+        {
+            background-color: white;
+            width: 60%;
+            height: 90%;
+            padding: 1em;
+            border-radius: 1em;
+            margin-top: 1em;
+            
+        }
+        .spacing
+        {
+            margin-top: 3em;
+        }
     </style>
     {% block content %}
+    
     <body>
-        <h2>Start Date: {{ start }} </h2>
-        <h2>End Date: {{ end }} </h2>
+        <button class="back">
+            <a href='/'>Back</a>
+        </button>
+        <div class="spacing"></div>
+        
         <h1 class="center-flex">Graphs and Analysis</h1>
-        <h4 class="center-flex">Close Prices of Various Stock Indices</h4>
+        <h4 class="center-flex">Covid-19 Effects on the US Market and Economy</h4>
+        <div class="dates">
+            
+            <p><b>Start Date:</b> {{ start }} </p>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <p><b>End Date: </b>{{ end }} </p>
+        </div>
+        <div class="background align-center">
+        <h3 class="center-flex">Close Prices of Various Stock Indices</h3>
         <img class = "NO-CACHE align-center graph"  src="{{url_for('static', filename='img/plot.png')}}"/>
         <br />
-        <h4 class="center-flex"> Total Confirmed Cases over Time</h4>
+        <h3 class="center-flex"> Total Confirmed Cases over Time</h3>
         <img class = "NO-CACHE align-center graph"  src="{{url_for('static', filename='img/cases.png')}}"/>
-        <h3>Correlation between S&P 500 and Total Confirmed Cases during the Times Given: {{ corr }}</h3>
+        <h3 class="center-flex">Correlation between S&P 500 and Total Confirmed Cases during the Times Given: {{ corr }}</h3>
+    </div>
     </body>
     {% endblock content %}
     <script>
