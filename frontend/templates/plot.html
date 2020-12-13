@@ -50,7 +50,7 @@
         <h2>Start Date: {{ start }} </h2>
         <h2>End Date: {{ end }} </h2>
         <h1 class="center-flex">Covid-19 Effects on the US Market and Economy</h1>
-        <img class = "align-center graph" src="plot.png">
+        <img class = "align-center graph"  src="{{url_for('static', filename='img/plot.png')}}"/>
     </body>
     {% endblock content %}
 </html>

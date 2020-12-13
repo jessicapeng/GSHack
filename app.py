@@ -57,7 +57,7 @@ def plot():
     end = request.args.get("end")
 
     fig = create_stock_figure(start, end)
-    plt.savefig('frontend/templates/plot.png')
+    plt.savefig('frontend/static/img/plot.png')
 
     # fig = create_covid_figure(start, end)
     # plt.savefig('frontend/templates/cases.png')
@@ -126,6 +126,6 @@ def create_covid_figure(start_date, end_date):
     
 #start the server
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='127.0.0.1', port=5000, debug=True)
 
     
